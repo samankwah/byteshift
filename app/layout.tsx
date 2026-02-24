@@ -1,5 +1,5 @@
 import "./globals.css"
-import { Space_Grotesk } from "next/font/google"
+import { Space_Grotesk, Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
@@ -8,6 +8,11 @@ import type React from "react"
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-sans",
+})
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
 })
 
 export const metadata = {
@@ -23,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${spaceGrotesk.variable} font-sans min-h-screen bg-background text-foreground`}>
+      <body className={`${spaceGrotesk.variable} ${inter.variable} font-sans min-h-screen bg-background text-foreground`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
           <main>{children}</main>

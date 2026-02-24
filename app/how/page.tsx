@@ -119,7 +119,7 @@ export default function HowPage() {
                 <motion.div
                   key={step.number}
                   className={`flex flex-col sm:flex-row gap-6 items-start p-8 rounded-2xl border border-border ${
-                    isEven ? "bg-muted dark:bg-gray-900" : "bg-card"
+                    isEven ? "bg-muted" : "bg-card"
                   }`}
                   initial={{ opacity: 0, x: isEven ? 30 : -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -150,7 +150,7 @@ export default function HowPage() {
       </section>
 
       {/* Why it works */}
-      <section className="bg-muted dark:bg-gray-950 py-24 px-6">
+      <section className="bg-muted py-24 px-6">
         <div className="max-w-6xl mx-auto">
           <motion.div className="text-center mb-16" {...fadeIn}>
             <h2 className="text-4xl font-bold text-foreground mb-4">Why It Works</h2>
@@ -183,12 +183,12 @@ export default function HowPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-gray-950 py-20 px-6 text-center">
+      <section className="bg-primary py-20 px-6 text-center">
         <motion.div className="max-w-2xl mx-auto" {...fadeIn}>
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="text-4xl font-bold text-primary-foreground mb-4">
             Let&apos;s start with a conversation
           </h2>
-          <p className="text-gray-400 text-lg mb-8">
+          <p className="text-primary-foreground/70 text-lg mb-8">
             No commitment required. Just a straightforward chat about what you&apos;re trying to achieve.
           </p>
           <Link

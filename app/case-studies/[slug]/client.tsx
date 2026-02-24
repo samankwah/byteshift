@@ -1,28 +1,101 @@
 "use client"
 
+import type { ReactNode, ComponentType } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowRight, ArrowLeft } from "lucide-react"
+import {
+  ArrowRight,
+  Shield,
+  Activity,
+  ShieldCheck,
+  KeyRound,
+  Monitor,
+  Lock,
+  Database,
+  BarChart2,
+  UserCheck,
+  HardDrive,
+  Wifi,
+  Fingerprint,
+  Globe,
+  Network,
+  GitMerge,
+  Server,
+  LayoutGrid,
+  Code,
+  Cpu,
+  Cloud,
+  PieChart,
+} from "lucide-react"
+import {
+  SiAmazonwebservices,
+  SiTerraform,
+  SiPostgresql,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiReact,
+  SiPython,
+  SiCisco,
+} from "react-icons/si"
 import type { CaseStudy } from "@/app/lib/case-studies"
 
-/* ── Animated blob background ──────────────────────── */
-function BlobBackground() {
+/* ── Tech icon registry ──────────────────────────────── */
+type AnyIcon = ComponentType<{ size?: number; className?: string }>
+
+const TECH_ICONS: Record<string, AnyIcon> = {
+  // Brand icons (react-icons/si)
+  AWS: SiAmazonwebservices as AnyIcon,
+  Terraform: SiTerraform as AnyIcon,
+  PostgreSQL: SiPostgresql as AnyIcon,
+  "Next.js": SiNextdotjs as AnyIcon,
+  "Node.js": SiNodedotjs as AnyIcon,
+  "React Native": SiReact as AnyIcon,
+  Python: SiPython as AnyIcon,
+  Azure: Cloud,
+  "Power BI": PieChart,
+  "Cisco Meraki": SiCisco as AnyIcon,
+  // AWS service icons → lucide fallbacks
+  RDS: Database,
+  CloudWatch: BarChart2,
+  IAM: UserCheck,
+  S3: HardDrive,
+  // Security concepts → lucide
+  "Zero-Trust": Shield,
+  SIEM: Activity,
+  "HIPAA Controls": ShieldCheck,
+  MFA: KeyRound,
+  "Endpoint EDR": Monitor,
+  Encryption: Lock,
+  // Protocol / generic
+  "REST APIs": Code,
+  WebSockets: Wifi,
+  "Biometrics API": Fingerprint,
+  "SD-WAN": Globe,
+  VLANs: Network,
+  BGP: GitMerge,
+  "SNMP Monitoring": Activity,
+  "Managed Switches": Server,
+  "Gov.uk Design System": LayoutGrid,
+}
+
+function TechTile({ name }: { name: string }) {
+  const Icon = TECH_ICONS[name]
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      <motion.div
-        className="absolute -left-32 -top-32 h-[500px] w-[500px] rounded-full bg-primary/10 blur-[120px] dark:bg-primary/20"
-        animate={{ x: [0, 60, -30, 0], y: [0, -40, 60, 0], scale: [1, 1.1, 0.92, 1] }}
-        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute right-0 top-1/2 h-[400px] w-[400px] rounded-full bg-indigo-500/5 blur-[120px] dark:bg-indigo-500/10"
-        animate={{ x: [0, -50, 30, 0], y: [0, 70, -40, 0], scale: [1, 0.9, 1.15, 1] }}
-        transition={{ duration: 28, repeat: Infinity, ease: "easeInOut", delay: 5 }}
-      />
+    <div className="flex flex-col items-center gap-2.5 rounded-xl bg-muted/50 p-4 text-center hover:bg-muted transition-colors">
+      <div className="flex h-10 w-10 items-center justify-center">
+        {Icon ? (
+          <Icon size={26} className="text-foreground/80" />
+        ) : (
+          <Cpu size={22} className="text-foreground/50" />
+        )}
+      </div>
+      <span className="text-[11px] font-medium text-muted-foreground leading-tight">{name}</span>
     </div>
   )
 }
 
+/* ── Animation ───────────────────────────────────────── */
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
@@ -33,148 +106,188 @@ interface Props {
   next: CaseStudy
 }
 
-export default function CaseStudyDetail({ cs, next }: Props) {
+/* ── Max-width token — tweak here to adjust column width */
+const COL = "max-w-[880px]"
+
+export default function CaseStudyDetail({ cs }: Props) {
   return (
-    <main className="min-h-screen bg-background">
-      {/* ── Hero ─────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-background px-6 pb-24 pt-28 lg:px-8">
-        <BlobBackground />
-        <div className="relative mx-auto max-w-5xl">
-          <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-            <Link
-              href="/case-studies"
-              className="mb-10 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              All case studies
-            </Link>
+    <main className="min-h-screen bg-background text-foreground">
 
-            <div className="mb-6 flex flex-wrap gap-2">
-              {cs.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-primary/50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary"
-                >
-                  {tag}
-                </span>
-              ))}
+      {/* Hero */}
+      <motion.div
+        className={`mx-auto ${COL} px-6 pt-28 pb-20`}
+        initial="hidden"
+        animate="visible"
+        variants={fadeUp}
+      >
+        <h1 className="text-4xl font-black text-foreground leading-[1.1] mb-8 sm:text-5xl">
+          {cs.title}
+        </h1>
+        <p className="text-lg font-semibold text-foreground leading-relaxed">{cs.summary}</p>
+      </motion.div>
+
+      {/* About */}
+      <Sec col={COL}>
+        <H2>About</H2>
+        <p className="text-muted-foreground text-base leading-relaxed">{cs.about}</p>
+      </Sec>
+
+      {/* The Challenge */}
+      <Sec col={COL}>
+        <H2>The Challenge</H2>
+        {cs.challengeIntro && (
+          <p className="text-muted-foreground text-base leading-relaxed mb-6">{cs.challengeIntro}</p>
+        )}
+        <ul className="space-y-3">
+          {cs.challengePoints.map((point) => (
+            <li key={point} className="flex items-start gap-3">
+              <span className="mt-1 shrink-0 text-muted-foreground text-base">•</span>
+              <p className="font-bold text-foreground text-base leading-relaxed">{point}</p>
+            </li>
+          ))}
+        </ul>
+      </Sec>
+
+      {/* The Solution */}
+      <Sec col={COL}>
+        <H2>The Solution</H2>
+        {cs.solutionIntro && (
+          <p className="text-muted-foreground text-base leading-relaxed mb-8">{cs.solutionIntro}</p>
+        )}
+        <ul className="space-y-6">
+          {cs.solutionPoints.map((item) => (
+            <li key={item.title} className="flex items-start gap-3">
+              <span className="mt-1 shrink-0 text-muted-foreground text-base">•</span>
+              <div>
+                <p className="font-bold text-foreground mb-1">{item.title}</p>
+                <p className="text-muted-foreground text-base leading-relaxed">{item.description}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </Sec>
+
+      {/* Our Approach */}
+      <Sec col={COL}>
+        <h2 className="text-2xl font-bold text-foreground pb-5 mb-6 border-b border-border">
+          Our Approach
+        </h2>
+        {cs.approachIntro && (
+          <p className="text-muted-foreground text-base leading-relaxed mb-8">{cs.approachIntro}</p>
+        )}
+        <div className="space-y-3">
+          {cs.approachSteps.map((step) => (
+            <div
+              key={step.phase}
+              className="grid items-stretch gap-3 sm:grid-cols-[220px_1fr]"
+            >
+              <div className="flex items-center rounded-xl bg-muted p-5">
+                <p className="font-bold text-foreground text-sm leading-snug">{step.phase}</p>
+              </div>
+              <div className="rounded-xl bg-muted p-5">
+                <p className="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
+              </div>
             </div>
-
-            <h1 className="mb-6 max-w-4xl text-4xl font-black leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              {cs.title}
-            </h1>
-
-            <p className="text-4xl font-black text-primary sm:text-5xl">{cs.result}</p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── Overview strip ───────────────────────────── */}
-      <section className="bg-muted px-6 py-14 lg:px-8 dark:bg-gray-900">
-        <div className="mx-auto grid max-w-5xl grid-cols-2 gap-8 md:grid-cols-4">
-          {[
-            { label: "Client", value: cs.client },
-            { label: "Industry", value: cs.industry },
-            { label: "Duration", value: cs.duration },
-            { label: "Services", value: cs.services.join(", ") },
-          ].map((item, i) => (
-            <motion.div
-              key={item.label}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={{
-                hidden: { opacity: 0, y: 16 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.45, delay: i * 0.08 } },
-              }}
-            >
-              <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                {item.label}
-              </p>
-              <p className="text-base font-semibold text-foreground">{item.value}</p>
-            </motion.div>
           ))}
         </div>
-      </section>
+      </Sec>
 
-      {/* ── Challenge ─────────────────────────────────── */}
-      <TwoColSection bg="light" heading="The Challenge" body={cs.challenge} />
-
-      {/* ── Approach ──────────────────────────────────── */}
-      <TwoColSection bg="muted" heading="Our Approach" body={cs.approach} />
-
-      {/* ── Solution ──────────────────────────────────── */}
-      <TwoColSection bg="light" heading="The Solution" body={cs.solution} />
-
-      {/* ── Outcomes ──────────────────────────────────── */}
-      <section className="bg-muted px-6 py-20 lg:px-8 dark:bg-gray-900">
-        <div className="mx-auto max-w-5xl">
-          <motion.h2
-            className="mb-12 text-3xl font-bold text-foreground sm:text-4xl"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            Outcomes
-          </motion.h2>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {cs.outcomes.map((o, i) => (
-              <motion.div
-                key={o.label}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: i * 0.1 } },
-                }}
-                className="rounded-2xl border border-border bg-background p-6 shadow-sm"
-              >
-                <p className="mb-1 text-3xl font-black text-primary">{o.metric}</p>
-                <p className="text-sm leading-snug text-muted-foreground">{o.label}</p>
-              </motion.div>
-            ))}
+      {/* Project Showcase Image (optional) */}
+      {cs.showcaseImage && (
+        <motion.div
+          className={`mx-auto ${COL} px-6 pb-16 border-b border-border`}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={fadeUp}
+        >
+          <div className="rounded-2xl overflow-hidden bg-muted border border-border">
+            <Image
+              src={cs.showcaseImage}
+              alt={`${cs.title} — project preview`}
+              width={1200}
+              height={680}
+              className="w-full object-cover"
+            />
           </div>
-        </div>
-      </section>
-
-      {/* ── Testimonial ───────────────────────────────── */}
-      {cs.testimonial && (
-        <section className="bg-background px-6 py-20 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-            >
-              <p className="text-3xl font-bold italic leading-relaxed text-foreground sm:text-4xl">
-                &ldquo;{cs.testimonial.quote}&rdquo;
-              </p>
-              <div className="mt-10 flex flex-col items-center gap-1">
-                <p className="font-semibold text-primary">{cs.testimonial.author}</p>
-                <p className="text-sm text-muted-foreground">{cs.testimonial.role}</p>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        </motion.div>
       )}
 
-      {/* ── CTA strip ─────────────────────────────────── */}
-      <section className="bg-gray-950 px-6 py-20 lg:px-8">
-        <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-10 md:flex-row md:items-center">
+      {/* Tech Stack */}
+      <Sec col={COL}>
+        <H2>Powerful Tech Stack</H2>
+        <p className="text-muted-foreground text-sm mb-6">
+          The tools and technologies that powered this engagement.
+        </p>
+        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5">
+          {cs.techStack.map((tech) => (
+            <TechTile key={tech} name={tech} />
+          ))}
+        </div>
+      </Sec>
+
+      {/* The Results */}
+      <Sec col={COL}>
+        <H2>The Results</H2>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {cs.outcomes.map((o) => (
+            <div
+              key={o.label}
+              className="rounded-2xl bg-card border border-border p-6 flex items-start"
+            >
+              <p className="text-primary text-lg font-semibold leading-snug">
+                {o.metric} {o.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </Sec>
+
+      {/* Testimonial */}
+      {cs.testimonial && (
+        <Sec col={COL}>
+          <blockquote className="border-l-2 border-primary/40 pl-5">
+            <p className="text-base italic leading-relaxed text-muted-foreground mb-5">
+              &ldquo;{cs.testimonial.quote}&rdquo;
+            </p>
+            <footer>
+              <p className="font-semibold text-foreground text-sm">{cs.testimonial.author}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">{cs.testimonial.role}</p>
+            </footer>
+          </blockquote>
+        </Sec>
+      )}
+
+      {/* Key Takeaway */}
+      <Sec col={COL}>
+        <p className="text-muted-foreground text-base leading-relaxed">
+          <span className="font-bold text-foreground">Key Takeaway: </span>
+          {cs.keyTakeaway}
+        </p>
+        <div className="mt-10">
+          <Link
+            href="/case-studies"
+            className="inline-flex items-center rounded-full border border-border px-6 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-foreground hover:text-background"
+          >
+            See all case studies
+          </Link>
+        </div>
+      </Sec>
+
+      {/* CTA strip */}
+      <section className="bg-primary px-6 py-20">
+        <div className={`mx-auto ${COL} flex flex-col items-start justify-between gap-10 md:flex-row md:items-center`}>
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
           >
-            <h2 className="max-w-lg text-3xl font-bold leading-snug text-white sm:text-4xl">
-              We&apos;re more than a vendor — we&apos;re your potential{" "}
-              <span className="underline decoration-white/40 underline-offset-4">Growth Partner.</span>
+            <h2 className="max-w-lg text-3xl font-bold leading-snug text-primary-foreground sm:text-4xl">
+              Ready to Build a{" "}
+              <span className="underline decoration-primary-foreground/40 underline-offset-4">Smart Partnership?</span>
             </h2>
-            <p className="mt-3 text-gray-400">Start your own transformation today.</p>
+            <p className="mt-3 text-primary-foreground/70">Start your own transformation today.</p>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -193,59 +306,31 @@ export default function CaseStudyDetail({ cs, next }: Props) {
         </div>
       </section>
 
-      {/* ── Next case study ───────────────────────────── */}
-      <section className="border-t border-border bg-background px-6 py-16 lg:px-8">
-        <div className="mx-auto max-w-5xl">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-            Next case study
-          </p>
-          <Link href={`/case-studies/${next.slug}`} className="group inline-flex items-center gap-5">
-            <span className="text-2xl font-bold text-foreground transition-colors group-hover:text-primary sm:text-3xl">
-              {next.result}
-            </span>
-            <span className="flex h-11 w-11 items-center justify-center rounded-full border border-foreground/20 transition-all duration-300 group-hover:border-primary group-hover:bg-primary">
-              <ArrowRight className="h-4 w-4 text-foreground transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-primary-foreground" />
-            </span>
-          </Link>
-          <p className="mt-2 text-muted-foreground">{next.title}</p>
-        </div>
-      </section>
+
     </main>
   )
 }
 
-/* ── Two-column body section ─────────────────────────── */
-function TwoColSection({
-  bg,
-  heading,
-  body,
-}: {
-  bg: "light" | "muted"
-  heading: string
-  body: string
-}) {
+/* ── Shared sub-components ───────────────────────────── */
+
+function Sec({ children, col }: { children: ReactNode; col: string }) {
   return (
-    <section className={`px-6 py-20 lg:px-8 ${bg === "muted" ? "bg-muted dark:bg-gray-900" : "bg-background"}`}>
-      <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2">
-        <motion.h2
-          className="text-2xl font-bold text-foreground sm:text-3xl"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-        >
-          {heading}
-        </motion.h2>
-        <motion.p
-          className="text-base leading-relaxed text-muted-foreground"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-        >
-          {body}
-        </motion.p>
-      </div>
-    </section>
+    <motion.section
+      className={`mx-auto ${col} px-6 py-14`}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-60px" }}
+      variants={fadeUp}
+    >
+      {children}
+    </motion.section>
+  )
+}
+
+function H2({ children }: { children: ReactNode }) {
+  return (
+    <h2 className="text-2xl font-bold text-foreground border-b border-border pb-5 mb-6">
+      {children}
+    </h2>
   )
 }

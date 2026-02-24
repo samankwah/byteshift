@@ -64,12 +64,12 @@ export default function WhoPage() {
       </section>
 
       {/* Mission strip */}
-      <section className="bg-gray-200 dark:bg-gray-800 py-16 px-6">
+      <section className="bg-muted py-16 px-6">
         <motion.div
           className="max-w-4xl mx-auto"
           {...fadeIn}
         >
-          <p className="text-gray-900 dark:text-white text-2xl sm:text-3xl font-bold leading-snug">
+          <p className="text-foreground text-2xl sm:text-3xl font-bold leading-snug">
             &ldquo;We exist to make world-class technology accessible to every business.&rdquo;
           </p>
         </motion.div>
@@ -109,7 +109,7 @@ export default function WhoPage() {
       </section>
 
       {/* Story */}
-      <section className="bg-muted dark:bg-gray-950 py-24 px-6">
+      <section className="bg-muted py-24 px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <motion.div {...fadeIn}>
             <h2 className="text-4xl font-bold leading-tight text-foreground">Our Story</h2>
@@ -140,10 +140,10 @@ export default function WhoPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-gray-950 py-20 px-6 text-center">
+      <section className="bg-primary py-20 px-6 text-center">
         <motion.div className="max-w-2xl mx-auto" {...fadeIn}>
-          <h2 className="text-4xl font-bold text-white mb-4">Ready to work with us?</h2>
-          <p className="text-gray-400 text-lg mb-8">
+          <h2 className="text-4xl font-bold text-primary-foreground mb-4">Ready to work with us?</h2>
+          <p className="text-primary-foreground/70 text-lg mb-8">
             Let&apos;s have a no-pressure conversation about where your business is headed.
           </p>
           <Link

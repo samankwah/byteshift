@@ -19,7 +19,9 @@ const formSchema = z.object({
 })
 
 export default function ContactForm() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [succeeded, setSucceeded] = useState(false)
+  const [serverError, setServerError] = useState<string | null>(null)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -32,15 +34,50 @@ export default function ContactForm() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsSubmitting(true)
-    // Simulate API call
-    setTimeout(() => {
-      console.log(values)
-      setIsSubmitting(false)
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setSubmitting(true)
+    setServerError(null)
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: values.name,
+        email: values.email,
+        phone: values.phoneNumber,
+        budget: values.budget,
+        message: values.message,
+      }),
+    })
+
+    setSubmitting(false)
+
+    if (res.ok) {
+      setSucceeded(true)
       form.reset()
-      alert("Thank you for your message. We'll get back to you soon!")
-    }, 2000)
+    } else {
+      const data = await res.json()
+      setServerError(data.error ?? "Something went wrong. Please try again.")
+    }
+  }
+
+  if (succeeded) {
+    return (
+      <section className="bg-background py-20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl font-bold text-foreground sm:text-4xl mb-4">Message Sent!</h2>
+            <p className="text-lg text-muted-foreground">
+              Thanks for reaching out. A ByteShift Labs consultant will be in touch within 24 hours.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+    )
   }
 
   return (
@@ -84,7 +121,7 @@ export default function ContactForm() {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="john@example.com" {...field} />
+                      <Input placeholder="john@example.com" type="email" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -129,8 +166,11 @@ export default function ContactForm() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? "Sending..." : "Send Message"}
+              {serverError && (
+                <p className="text-sm text-destructive">{serverError}</p>
+              )}
+              <Button type="submit" className="w-full" disabled={submitting}>
+                {submitting ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </Form>
@@ -139,4 +179,3 @@ export default function ContactForm() {
     </section>
   )
 }
-
