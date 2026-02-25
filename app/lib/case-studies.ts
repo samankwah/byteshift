@@ -101,6 +101,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     keyTakeaway:
       "Cloud migration is as much a process discipline problem as a technology problem — phasing and rollback planning made the difference between a smooth migration and a disaster.",
+    showcaseImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&h=680&q=80",
     testimonial: {
       quote:
         "ByteShift Labs made what felt like an impossible undertaking look effortless. Our costs dropped immediately and our team can finally focus on building products instead of fighting infrastructure.",
@@ -186,6 +187,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     keyTakeaway:
       "Security is not a one-time project — the monitoring and training programme we left behind is what sustains zero breaches over 12 months.",
+    showcaseImage: "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1200&h=680&q=80",
     testimonial: {
       quote:
         "We went from worrying about the next breach to confidently passing our compliance audit. The ByteShift team brought both technical depth and a calm, structured approach that our staff trusted.",
@@ -271,6 +273,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     keyTakeaway:
       "Two weeks of process discovery before writing code saved months of rework — building the right thing mattered more than building fast.",
+    showcaseImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&h=680&q=80",
   },
   {
     slug: "mobile-banking-app",
@@ -350,6 +353,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     keyTakeaway:
       "Designing the API layer in parallel with the mobile app removed the biggest bottleneck — neither team ever had to wait for the other.",
+    showcaseImage: "https://images.unsplash.com/photo-1616077168712-fc6c788db4af?auto=format&fit=crop&w=1200&h=680&q=80",
     testimonial: {
       quote:
         "The app launched on time, performed flawlessly under load, and our customers love it. ByteShift delivered a product we're genuinely proud of.",
@@ -435,6 +439,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     keyTakeaway:
       "A standardised site blueprint was the unlock — once the pilot was validated, every subsequent deployment was fast, predictable, and low-risk.",
+    showcaseImage: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&h=680&q=80",
   },
   {
     slug: "digital-transformation-roadmap",
@@ -514,6 +519,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     keyTakeaway:
       "The roadmap was only as valuable as the internal team left behind to deliver it — building capability was as important as building the services.",
+    showcaseImage: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&h=680&q=80",
     testimonial: {
       quote:
         "ByteShift Labs brought the rigour of a strategy firm and the execution capability of a tech company. They didn't just hand us a document — they built with us.",

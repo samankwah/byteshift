@@ -11,7 +11,7 @@ const projects = [
     slug: "cloud-migration-fintech",
     title: "Cloud Migration for FinTech Firm",
     description: "Migrated legacy on-premise systems to AWS, reducing operational costs by 40%",
-    imageUrl: "/placeholder.svg?height=600&width=800",
+    imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&h=600&q=80",
     category: "Cloud",
   },
   {
@@ -19,7 +19,7 @@ const projects = [
     slug: "cybersecurity-overhaul",
     title: "Enterprise Cybersecurity Overhaul",
     description: "Full security audit and zero-trust framework implementation for a healthcare provider",
-    imageUrl: "/placeholder.svg?height=800&width=600",
+    imageUrl: "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=800&h=600&q=80",
     category: "Cybersecurity",
   },
   {
@@ -27,7 +27,7 @@ const projects = [
     slug: "custom-erp-development",
     title: "Custom ERP Development",
     description: "Built a bespoke ERP platform to streamline operations for a logistics company",
-    imageUrl: "/placeholder.svg?height=600&width=800",
+    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&h=600&q=80",
     category: "Software",
   },
   {
@@ -35,7 +35,7 @@ const projects = [
     slug: "mobile-banking-app",
     title: "Mobile Banking App",
     description: "Cross-platform mobile application with real-time transaction tracking and biometric auth",
-    imageUrl: "/placeholder.svg?height=800&width=600",
+    imageUrl: "https://images.unsplash.com/photo-1616077168712-fc6c788db4af?auto=format&fit=crop&w=800&h=600&q=80",
     category: "Mobile App",
   },
   {
@@ -43,7 +43,7 @@ const projects = [
     slug: "network-infrastructure-redesign",
     title: "Network Infrastructure Redesign",
     description: "Designed and deployed a resilient multi-site network for a retail chain",
-    imageUrl: "/placeholder.svg?height=600&width=800",
+    imageUrl: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&h=600&q=80",
     category: "Infrastructure",
   },
   {
@@ -51,7 +51,7 @@ const projects = [
     slug: "digital-transformation-roadmap",
     title: "Digital Transformation Roadmap",
     description: "End-to-end consulting engagement to modernise a government agency's IT operations",
-    imageUrl: "/placeholder.svg?height=800&width=600",
+    imageUrl: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&h=600&q=80",
     category: "Consulting",
   },
 ]
