@@ -31,7 +31,7 @@ export default function Hero() {
           >
             <a
               href="#contact"
-              className="apple-button w-full sm:w-auto text-center"
+              className="apple-button"
             >
               Get a Free Consultation
             </a>
