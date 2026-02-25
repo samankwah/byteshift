@@ -27,7 +27,7 @@ export default function Header() {
             <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">ByteShift Labs</span>
               <img
-                className="h-10 w-auto"
+                className="h-7 w-auto sm:h-10"
                 src="/byteshift-high-resolution-logo-transparent.png"
                 alt="ByteShift Labs Logo"
               />
