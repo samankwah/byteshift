@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
+import { Loader2, CheckCircle2 } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
@@ -66,13 +67,16 @@ export default function ContactForm() {
       <section className="bg-background py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col items-center gap-4"
           >
-            <h2 className="text-3xl font-bold text-foreground sm:text-4xl mb-4">Message Sent!</h2>
-            <p className="text-lg text-muted-foreground">
+            <CheckCircle2 className="w-14 h-14 text-primary" strokeWidth={1.5} />
+            <h2 className="text-3xl font-bold text-foreground sm:text-4xl">Message Sent!</h2>
+            <p className="text-lg text-muted-foreground max-w-md">
               Thanks for reaching out. A ByteShift Labs consultant will be in touch within 24 hours.
+              Check your inbox — we&apos;ve sent you a confirmation.
             </p>
           </motion.div>
         </div>
@@ -170,7 +174,12 @@ export default function ContactForm() {
                 <p className="text-sm text-destructive">{serverError}</p>
               )}
               <Button type="submit" className="w-full" disabled={submitting}>
-                {submitting ? "Sending..." : "Send Message"}
+                {submitting ? (
+                  <span className="inline-flex items-center gap-2">
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Sending…
+                  </span>
+                ) : "Send Message"}
               </Button>
             </form>
           </Form>
