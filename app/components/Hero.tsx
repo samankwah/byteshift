@@ -24,14 +24,14 @@ export default function Hero() {
             We help businesses navigate the digital frontier. From cloud infrastructure to cybersecurity — ByteShift Labs delivers intelligent IT solutions that drive real results.
           </motion.p>
           <motion.div
-            className="mt-10 flex items-center gap-x-6"
+            className="mt-10 flex flex-col sm:flex-row items-center gap-4 sm:gap-x-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <a
               href="#contact"
-              className="apple-button"
+              className="apple-button w-full sm:w-auto text-center"
             >
               Get a Free Consultation
             </a>
