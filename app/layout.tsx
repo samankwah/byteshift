@@ -15,10 +15,41 @@ const inter = Inter({
   variable: "--font-inter",
 })
 
-export const metadata = {
-  title: "ByteShift Labs | IT Consulting",
-  description: "ByteShift Labs — cutting-edge IT consulting, cloud solutions, cybersecurity, and digital transformation.",
-    generator: 'v0.app'
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://byteshiftlabs.netlify.app"),
+  title: {
+    default: "ByteShift Labs | Expert IT Consulting",
+    template: "%s | ByteShift Labs",
+  },
+  description:
+    "ByteShift Labs is a lean IT consultancy delivering cloud migrations, cybersecurity, custom software, and digital transformation for ambitious businesses.",
+  keywords: [
+    "IT consulting",
+    "cloud migration",
+    "cybersecurity",
+    "digital transformation",
+    "custom software development",
+    "ERP development",
+    "network infrastructure",
+  ],
+  authors: [{ name: "ByteShift Labs" }],
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    siteName: "ByteShift Labs",
+    title: "ByteShift Labs | Expert IT Consulting",
+    description:
+      "ByteShift Labs is a lean IT consultancy delivering cloud migrations, cybersecurity, custom software, and digital transformation for ambitious businesses.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ByteShift Labs | Expert IT Consulting",
+    description:
+      "ByteShift Labs is a lean IT consultancy delivering cloud migrations, cybersecurity, custom software, and digital transformation for ambitious businesses.",
+  },
+  robots: { index: true, follow: true },
 }
 
 export default function RootLayout({
