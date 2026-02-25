@@ -183,17 +183,17 @@ export default function HowPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-primary py-20 px-6 text-center">
+      <section className="bg-foreground py-20 px-6 text-center">
         <motion.div className="max-w-2xl mx-auto" {...fadeIn}>
-          <h2 className="text-4xl font-bold text-primary-foreground mb-4">
+          <h2 className="text-4xl font-bold text-background mb-4">
             Let&apos;s start with a conversation
           </h2>
-          <p className="text-primary-foreground/70 text-lg mb-8">
+          <p className="text-background/70 text-lg mb-8">
             No commitment required. Just a straightforward chat about what you&apos;re trying to achieve.
           </p>
           <Link
             href="/#contact"
-            className="inline-block px-8 py-4 rounded-full bg-white text-gray-900 font-semibold text-lg hover:bg-gray-100 transition-colors"
+            className="inline-block px-8 py-4 rounded-full bg-background text-foreground font-semibold text-lg hover:bg-muted transition-colors"
           >
             Get in Touch
           </Link>

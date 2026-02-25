@@ -117,17 +117,17 @@ export default function CaseStudiesPage() {
       </section>
 
       {/* ── CTA strip ───────────────────────────────── */}
-      <section className="relative mt-10 bg-gray-950">
+      <section className="relative mt-10 bg-foreground">
         <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-10 px-6 py-20 md:flex-row md:items-center lg:px-8">
           <motion.h2
-            className="max-w-lg text-3xl font-bold leading-snug text-white sm:text-4xl"
+            className="max-w-lg text-3xl font-bold leading-snug text-background sm:text-4xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             We&apos;re more than a vendor — we&apos;re your potential{" "}
-            <span className="underline decoration-white/40 underline-offset-4">Growth Partner.</span>
+            <span className="underline decoration-background/40 underline-offset-4">Growth Partner.</span>
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -137,7 +137,7 @@ export default function CaseStudiesPage() {
           >
             <Link
               href="/#contact"
-              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-8 py-4 font-semibold text-gray-900 transition-colors hover:bg-gray-100"
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-background px-8 py-4 font-semibold text-foreground transition-colors hover:bg-muted"
             >
               Let&apos;s Talk
               <ArrowRight className="h-4 w-4" />
